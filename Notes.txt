@@ -1,0 +1,101 @@
+To include Bootstrap in the application: 
+1. Install the Bootstrap package using npm 
+    npm install bootstrap 
+2. OPen the angular.json file and in the styles section, include 
+    "styles" : [
+        "node_modules/bootstrap/dist/css/bootstrap.css", 
+        "src/app/styles.css"
+    ]
+3. In the Main.ts file, 
+    import "bootstrap" 
+4. Start using bootstrap classes in the template htmls. 
+
+-- Alternate way is to install 
+1. ng-bootstrap using 
+    npm install @ng-bootstrap/ng-bootstrap font-awesome
+    
+Organizing the components in the project 
+- folders based on the features that are being added, 
+    - feature called products - create a folder called products and all related 
+            components, directives, pipes,services, models are created in this folder. 
+- usage-specific folders 
+    - shareable components - ui folder 
+    - shareable services   - services folder 
+    - models               - models folder
+
+- in the app folder, we create the following folders 
+1. ui 
+2. models
+3. services 
+
+- Create a new component called SiteHeader (site-header) in the UI folder. 
+- Create a new component called SiteFooter (site-footer) in the UI folder. 
+--> ng generate component ui/site-header --skip-tests --flat 
+--> ng generate component ui/site-footer --skip-tests --flat 
+--> ng generate component ui/not-found --skip-tests --flat 
+--> ng generate component ui/site-error --skip-tests --flat 
+--> ng generate component ui/home --skip-tests --flat 
+
+
+Angular works with the MV-* patterns 
+Model 
+    - Domain Models, 
+    - View Models
+View
+    - Renders the Models -  supported by the HTML templates
+    - use interpolation {{ }} to render the properties 
+    - use attributes to handle the values 
+    - events to handle the actions. 
+* 
+    - Logic components - *.ts code files. 
+        - handles the user actions and decides on the next course of action 
+        - updates and refreshes the models 
+        - retrieve content from shared services
+
+Services 
+    - provides a single source of truth. 
+    - shared data provider 
+    - are called as injectables and added to the application via service schematic
+
+To create class, use the class schematic 
+ng g class models/product --skip-tests
+
+
+Components/Services to be added: 
+1. ProductsHomeComponent 
+    ng g component products/products-home --skip-tests --flat 
+2. ProductsListComponent 
+    ng g component products/products-list --skip-tests --flat 
+3. ProductsDetailComponent 
+    ng g component products/products-detail --skip-tests --flat 
+4. ProductsService 
+    ng g service products/products --skip-tests 
+
+Validation 
+- using HTML validation attributes [ required, minlength, maxLength, pattern, .... ]
+- 
+Validation States 
+-> valid, invalid - all validators return true (valid) or false(invalid) 
+-> touched, untouched - the element is focus in and tabbed out (touched) or not (untouched)
+-> pristine, dirty - model value has changed (dirty) or not (pristine)
+
+-> when the value is assigned to an input element for the first time: 
+ state -> pristine, untouched and valid 
+ when we tab into the element and change the value 
+ state -> dirty, touched, valid 
+ when we tab out of the element after making changes 
+ state -> dirty, touched, valid 
+ when all the validators return true 
+ state -> valid 
+ when any validator returns false 
+ state -> invalid 
+
+--the validation states are collected into errors collection for the form. 
+
+-- these elements need to have an id, validation attributes and #ref name for the element 
+-- use the ref names and track the validation state.
+
+
+
+
+

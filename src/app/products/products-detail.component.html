@@ -1,0 +1,91 @@
+
+<div class="card shadow m-auto m-2">
+
+    <div class="card-header bg-dark text-center">
+        <div class="fs-3 text-uppercase text-white-50">Product Details</div>
+    </div>
+    <div class="card-body">
+        <form id="form1" #form1="ngForm" (ngSubmit)="onSubmit($event)">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control"
+                    name="productName"
+                    id="productName"
+                    required 
+                    minlength="4"
+                    [disabled]="!isEditAction"
+                    [(ngModel)]="selectedProduct.productName"
+                    #pName = "ngModel"
+                    />
+                <div *ngIf="pName.invalid && (pName.dirty || pName.touched)"
+                     class="alert alert-danger">
+                    <div *ngIf="pName.errors?.['required']">
+                        Name is required.
+                    </div>
+                    <div *ngIf="pName.errors?.['minlength']">
+                        Product Name should be at least 4 chars.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unitPrice">Price per unit</label>
+                <input type="number" class="form-control"
+                    name="unitPrice"
+                    required
+                    min="1"
+                    max="1000"
+                    id="unitPrice"
+                    #price="ngModel"
+                    [disabled]="!isEditAction"
+                    [(ngModel)]="selectedProduct.unitPrice"/>
+                <div *ngIf="price.invalid && (price.dirty || price.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="price.errors?.['required']">
+                       Price is required.
+                    </div>
+                    <div *ngIf="price.errors?.['min']">
+                       Price should be greater than 1.
+                    </div>
+                    <div *ngIf="price.errors?.['max']">
+                        Price should be less than 1000.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unitsInStock">Stock Level</label>
+                <input type="text" class="form-control"
+                    name="unitsInStock"
+                    [disabled]="!isEditAction"
+                    [(ngModel)]="selectedProduct.unitsInStock"/>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="discontinued"
+                    [(ngModel)]="selectedProduct.discontinued"
+                    class="form-check-inline"/>
+                <label for="discontinued">Discontinued</label>
+            </div>
+            <div class="form-group text-center">
+                
+                <button *ngIf="isEditAction" type="submit" 
+                        class="btn btn-sm btn-outline-success mx-1"
+                        [disabled]="form1.invalid">
+                    Update
+                </button>
+            
+                <div *ngIf="isDeleteAction" class="d-inline">
+                    <span class="text-danger">Are you sure you want to remove this item?</span>
+                    <br/>
+                    <button  type="button" (click)="deleteAction($event)"
+                        class="btn btn-sm btn-outline-danger mx-2"> Yes </button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary"
+                    (click)="onReset($event)">
+                    Clear
+                </button>
+            </div>
+        </form>
+    </div>    
+</div>
+<p>
+    {{selectedProduct|json}}
+</p>

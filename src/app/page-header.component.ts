@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-page-header',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class PageHeaderComponent {
 
+  @Input()  //is an input parameter, value is assigned by the parent container
+  text:string = "Page Header";
 }

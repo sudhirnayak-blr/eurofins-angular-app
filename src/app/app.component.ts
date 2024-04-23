@@ -10,11 +10,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'First Angular App';
-  counter = 10; 
-
-  click(e:any) { 
-    this.title = "New Title" + this.counter; 
-    this.counter+=10;
-  }
+  
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsService } from './products.service';
 import { Product } from '../models/product';
 import { IProductActions } from '../models/customInterfaces';
+import { ProductsApiService } from './products-api.service';
 
 @Component({
   selector: 'products-home',
@@ -21,17 +22,27 @@ export class ProductsHomeComponent {
   //Delete - isEditAction=false, isDeleteAction=true 
 
   constructor(
-    public service: ProductsService
+    public service: ProductsService,
+    public apiService: ProductsApiService
   ) { 
-    this.productList = this.service.getAllProduct();
+    //this.productList = this.service.getAllProduct();
+    this.apiService.getProducts().subscribe((data) =>{
+        console.log(data);
+        this.productList = data;
+      }
+    );
   }
 
   select(e: IProductActions) { 
     //console.log('Step 2: Parent function invoked/reached.')
-    var item = this.service.getProductDetails(e.productId);
+    //var item = this.service.getProductDetails(e.productId);
+    //let item={};
+    this.apiService.getDetails(e.productId).subscribe(
+      (data)=>this.selectedProduct= data
+    )
     //console.log('Step 3: Item is selected', item);
-    if(item!=null) 
-      this.selectedProduct=item;
+    // if(item!=null) 
+    //   this.selectedProduct=item;
     if(e.actionType==1) {   //For View Action
       this.isEditAction=false;
       this.isDeleteAction=false;
@@ -53,20 +64,39 @@ export class ProductsHomeComponent {
     //update the data into the list using the service 
     //and then we have to repopulate the list. 
     if(this.isAddNewAction)
-      this.service.createNew(model);
-    else 
-      this.service.update(model);
-    this.initialize();
+      {
+        //this.service.createNew(model);
+        this.apiService.createNew(model).subscribe(
+          data=>{
+            this.initialize();
+          })
+      }
+    else {
+      //this.service.update(model);
+      this.apiService.update(model).subscribe(
+        data=>{
+          this.initialize();
+        })
+    }
+    //this.initialize();
   }
   resetSelection(e:string) { 
     this.initialize();
   }
   deleteItem(e:Product) { 
-    this.service.delete(e.productId);
-    this.initialize();
+    //this.service.delete(e.productId);
+    this.apiService.delete(e.productId).subscribe(
+      (data) =>{
+        this.initialize();
+      })
+    //this.initialize();
   }
   initialize() {
-    this.productList = this.service.getAllProduct();
+    //this.productList = this.service.getAllProduct();
+    this.apiService.getProducts().subscribe((data) =>{
+      console.log(data);
+      this.productList = data;
+    });
     this.selectedProduct=<Product>{};
     this.isEditAction=false;
     this.isDeleteAction=false;

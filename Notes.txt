@@ -71,6 +71,54 @@ Components/Services to be added:
 4. ProductsService 
     ng g service products/products --skip-tests 
 
+Angular Forms 
+- module called as FormsModule and ReactiveFormsModule 
+- 2 types of forms development 
+--> Reactive Forms 
+--> Template-Driven Forms 
+- capture user input events, validate the inputs, create form model and data model to update, track changes 
+
+Template Driven Forms 
+- relies on directives [ ng-model, validation directives] 
+- helps in manipulating the object model directly. 
+- asynchronous - the object model is updated directly by Angular without the user intervention 
+- whenever the user makes changes to the input elements, Angular will asychronously update the associated Object model property assigned to that input element. 
+<input type="text" ng-model=model.UnitPrice /> 
+	document.getElementById("price").value = model.UnitPrice; 
+	document.getElementById("price").addEventListener("change", (e) => {
+		model.unitPrice = document.getElementById("price").value;
+		document.getElementById("price").value = model.UnitPrice; 
+	});
+- Unstructured and mutable data model 
+- Data Flow is asynchronous 
+- Form validation happen via directives
+
+
+Reactive Forms 
+- component class defines the form data model
+- Structed and immutable data 
+- model object is not used for updates directly 
+- create a copy of the model object and assign it to the form element. 
+- the form elements updated data will be collected at a later point in time and 
+	not when the form element is getting updated. 
+- model updation can be controlled 
+
+
+
+Form Foundational Classes 
+FormControl 	-> Tracks the value and validation status of an individual form 
+FormGroup 	-> tracks values and status for a collection of form controls 
+FormArray 	-> tracks values and status for a array of form controls 
+ControlValueAccessor -> create an Bridge between Angular FormControl elements and its 				built-in DOM elements 
+
+
+IMplementation steps
+Template-Driven Form 
+- add FormsModule in the AppModule, this makes all the Form Directives available to the components. 
+- use the ng-model directive on the specified elements in the HTML template 
+- 
+
+
 Validation 
 - using HTML validation attributes [ required, minlength, maxLength, pattern, .... ]
 - 
@@ -96,6 +144,56 @@ Validation States
 -- use the ref names and track the validation state.
 
 
+Routing
+- Navigation across components 
+- occurs on the browser/client side - HTTP verb mapping is not required. 
+- route/path and a component mapping 
+- { path: 'home', component: HomeComponent }   ==> http://localhost:4200/home
+- "{controller}/{action}/{id}
+- provides a placeholder for displaying/rendering the components 
+    -> router-outlet component/placeholder 
+    -> Angular will render components below the router-outlet marker 
+-> module - @angular/router
+-> Routes, Route, ActivatedRoute, RouterOutlet .... components/class/objects 
+-> Routing table needs to defined and attached to the root component/module
+-> Routing infrastructure enapsulates the browsers History object 
+-> routing of components happen on the client-side 
+
+<base href='/'/>  ==>http://localhost:4200/
+
+Path definitions 
+1. { path : 'home/list', component: HomeListComponent } 
+2. { path : '', redirect:'/home', pathMatch: 'full' }
+    http://localhost:4200  ===> http://localhost:4200/home
+3. path wildcards 
+    { path: '**', component: PageNotFoundComponent }
+4. parameterized routes 
+    { path: 'products/details/:id, component: DetailsComponent }
+5. Nested routes are also allowed 
+    { path: 'products', 
+      children: [
+        { path:'list', component: ProductListComponent },
+        { path:'createnew', component: ProductCreateNewComponent }
+      ]  }
+   ==> route => /products/list, /products/createnew 
+6. Guarded or Access controlled paths are also allowed 
+    CanActivate, CanDeactivate methods 
 
 
+For Module Scehamtics 
+ng g module app-routing --flat --routing 
 
+ng g module --help 
+
+RxJS 
+- Reactive Extension for JS 
+- based on the Observable/Observer patterns 
+- Subject, Observer 
+- allows data pipelining 
+- data is processed through various stages and each stage filters the data 
+
+HttpClientModule 
+- angular built in http client library 
+- based on XHR, (+ iterator pattern, event emitter, observables = rxjs) 
+- 
+ng g service products/products-api --flat --skip-tests

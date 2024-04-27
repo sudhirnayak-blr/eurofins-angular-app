@@ -14,6 +14,7 @@ import { HomeComponent } from './ui/home.component';
 import { ProductsHomeComponent } from './products/products-home.component';
 import { ProductsDetailComponent } from './products/products-detail.component';
 import { ProductsListComponent } from './products/products-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 //Decorator - NGModule 
@@ -36,6 +37,7 @@ import { ProductsListComponent } from './products/products-list.component';
   imports: [
     BrowserModule, //should be the first module to be imported always, 
     //any other module imports should happen after the BrowserModule import. 
+    HttpClientModule,
     FormsModule,  //adds the import {FormsModule} from "@angular/forms"
     AppRoutingModule
   ],

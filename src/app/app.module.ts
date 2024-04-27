@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { ProductsHomeComponent } from './products/products-home.component';
 import { ProductsDetailComponent } from './products/products-detail.component';
 import { ProductsListComponent } from './products/products-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './auth/login.component';
 
 
 //Decorator - NGModule 
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     ProductsHomeComponent,
     ProductsDetailComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    LoginComponent
   ],
   /*imports - lists all the external modules that are required in this module. */
   imports: [
@@ -39,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     //any other module imports should happen after the BrowserModule import. 
     HttpClientModule,
     FormsModule,  //adds the import {FormsModule} from "@angular/forms"
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   /* exports - lists all the app modules that will be made available to 

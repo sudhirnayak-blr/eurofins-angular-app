@@ -4,12 +4,14 @@ import { HomeComponent } from './ui/home.component';
 import { ProductsHomeComponent } from './products/products-home.component';
 import { NotFoundComponent } from './ui/not-found.component';
 import { SiteErrorComponent } from './ui/site-error.component';
+import { LoginComponent } from './auth/login.component';
 
 const routes: Routes = [
   // http://localhost:4200/home
   { path:'home', component: HomeComponent },
   // http://localhost:4200/products
   { path: 'products', component: ProductsHomeComponent },
+  { path: 'login', component: LoginComponent },
   // http://localhost:4200/error
   { path: 'error/:errorCode', component: SiteErrorComponent },
   // http://localhost:4200

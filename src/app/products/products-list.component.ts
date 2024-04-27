@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, 
+  EventEmitter, 
+  Input, 
+  Output,
+  OnInit,
+  OnChanges, 
+  SimpleChange,
+  DoCheck,
+  SimpleChanges
+} from '@angular/core';
 import { Product } from '../models/product';
 import { ProductsService } from './products.service';
 import { IProductActions } from '../models/customInterfaces';
@@ -8,11 +17,22 @@ import { IProductActions } from '../models/customInterfaces';
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.css'
 })
-export class ProductsListComponent {
+export class ProductsListComponent 
+    implements OnInit, OnChanges, DoCheck 
+{
+
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log('product list component - ngOnChange', changes);
+  }
+  ngOnInit(): void {
+      console.log('ProductListComponent, ngOnInit')
+  }
+  ngDoCheck(): void {
+      console.log('ProductListComponent, ngDoCheck')
+  }
 
   @Input()
   productList: Product[] = []; 
-
 
   @Output("selectItemEvent") 
   //selectItemEvent : EventEmitter<number> = new EventEmitter<number>();

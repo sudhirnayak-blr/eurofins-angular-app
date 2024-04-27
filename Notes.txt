@@ -197,3 +197,85 @@ HttpClientModule
 - based on XHR, (+ iterator pattern, event emitter, observables = rxjs) 
 - 
 ng g service products/products-api --flat --skip-tests
+
+
+Angular Lifecycle
+- every angular component has a lifecycle 
+- LC starts when Angular instantiates the component and renders the 
+   component view along with all the child views 
+- LC methods/hooks 
+    - detects changes that happen to the data-bound model/properties 
+    - updates the view/component instance as needed 
+    - LC ends when Angular destroys/removes the component from the view. 
+    - begin after the constructor is called 
+- Allows the dev to tap into these events/methods and plug in our 
+    custom code into this.
+
+Sequence of Lifecycle events 
+-Events -> ngOnChanges, ngOnInit, ngOnDestroy, ngDoCheck, ....
+Sequence 
+1. ngOnChanges 
+    - triggered when an Angular components sets/resets the data-bound input properties 
+    - method receives a SimpleChanges object, sent by Angular runtime, 
+    - every data change, this method is triggered - can have adverse performance impact
+2. ngOnInit
+    - triggered after the component first displays the data-bound properties 
+    - similar to the onload method. 
+    - call the API services/router data are extracted in this event
+    - calling APIs should not be done in the constructor
+    - even if ngOnCHanges is not called, this method executes
+    - executes only once per component lifetime 
+3. ngDoCheck
+    - Whenever Angular detects and acts upon the changes in the data-bound properties, 
+        this event is triggered. 
+4. ngAfterContentInit
+    - triggered after Angular projects external content into the component's view 
+    - import HTML content from outside the component and insert that content into the component's 
+        template at a specified location. 
+5. ngAfterContentChecked
+    - After the external content is projected into the current component template, Angular checks the 
+        external content
+6. ngAfterViewInit
+    - when a child view (template) is injected into the component's view 
+7. ngAfterViewChecked
+    - Triggered after Angular chackes the component's view or the child view 
+8. ngOnDestroy 
+    - triggered when the component is unloaded/just before the component is removed/replaced with another 
+        component. 
+    - all subscriptions to events will get unsubscribed 
+    - Unsubscribed Observables will be detached 
+    - helps in eliminating memory leaks. 
+
+All the above LC events have their own Interfaces which nneds to be implemented by the specified component
+
+
+Feature Modules 
+- self contained unit with its own component hierarchy, routing infrastructure, 
+    services, models, other schematic elements 
+- these mmodules can be plugged in or plugged out of the application easily. 
+
+
+
+For Authentication 
+- login model, authentication service, login components 
+
+--> add the schematics 
+ng g class auth/login-view-model --skip-tests 
+ng g service auth/authentication --skip-tests --flat 
+ng g component auth/login --skip-tests --flat 
+
+-- update the app-module (done automatically)
+-- add a route in the routing module 
+    { path: 'login', component: LoginComponent}
+-- update the site-header to display the login link button 
+
+
+Reactive Forms 
+- FormControl - represents one form element 
+- NgForm - represents the HTML form 
+- FormGroup - collection of form controls and its validations 
+- FormBuilder - factory class for creating the forms 
+                -- contains methods like controls, groups, arrays. 
+
+- import the ReactiveFormsModule Module 
+

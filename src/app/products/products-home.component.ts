@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import { 
+  AfterViewChecked,
+  AfterViewInit,
+  Component, 
+  OnChanges, 
+  OnDestroy, 
+  OnInit, 
+  SimpleChanges 
+} from '@angular/core';
+
 import { ProductsService } from './products.service';
 import { Product } from '../models/product';
 import { IProductActions } from '../models/customInterfaces';
@@ -9,7 +18,29 @@ import { ProductsApiService } from './products-api.service';
   templateUrl: './products-home.component.html',
   styleUrl: './products-home.component.css'
 })
-export class ProductsHomeComponent {
+export class ProductsHomeComponent 
+  implements OnChanges, OnInit, OnDestroy, 
+  AfterViewInit, AfterViewChecked {
+
+    ngAfterViewChecked(): void {
+        console.log('Product Home Component - After viewChecked')
+    }
+    ngAfterViewInit(): void {
+      console.log('Product Home Component - After view Init')
+    }
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log('ngOnChanges triggered.', changes);
+  }
+  ngOnInit(): void {
+      console.log('ngOnInit called.');
+      this.apiService.getProducts().subscribe((data) =>{
+        console.log(data);
+        this.productList = data;
+      });
+  }
+  ngOnDestroy(): void {
+      console.log('ngOnDestroy called.')
+  }
 
   productList: Product[]=[];
   selectedProduct: Product = <Product>{}
@@ -26,11 +57,11 @@ export class ProductsHomeComponent {
     public apiService: ProductsApiService
   ) { 
     //this.productList = this.service.getAllProduct();
-    this.apiService.getProducts().subscribe((data) =>{
-        console.log(data);
-        this.productList = data;
-      }
-    );
+    // this.apiService.getProducts().subscribe((data) =>{
+    //     console.log(data);
+    //     this.productList = data;
+    //   }
+    // );
   }
 
   select(e: IProductActions) { 

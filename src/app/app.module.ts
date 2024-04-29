@@ -16,6 +16,7 @@ import { ProductsDetailComponent } from './products/products-detail.component';
 import { ProductsListComponent } from './products/products-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './auth/login.component';
+import { AdminModule } from './admin/admin.module';
 
 
 //Decorator - NGModule 
@@ -42,6 +43,7 @@ import { LoginComponent } from './auth/login.component';
     HttpClientModule,
     FormsModule,  //adds the import {FormsModule} from "@angular/forms"
     ReactiveFormsModule,
+    AdminModule,
     AppRoutingModule
   ],
   /* exports - lists all the app modules that will be made available to 

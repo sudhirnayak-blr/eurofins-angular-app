@@ -279,3 +279,23 @@ Reactive Forms
 
 - import the ReactiveFormsModule Module 
 
+
+- Guard 
+--> restricts access to routes 
+--> CanActivate, CanDeactivate
+
+--> Feature Modules 
+ng g module admin --routing 
+ng g component admin/admin-home --skip-tests --flat 
+ng g component admin/admin-product-list --skip-tests --flat 
+ng g component admin/admin-product-details --skip-tests --flat 
+ng g component admin/admin-product-create --skip-tests --flat 
+ng g component admin/admin-product-update --skip-tests --flat 
+ng g component admin/admin-product-remove --skip-tests --flat 
+ng g service admin/admin-product --skip-tests --flat 
+ng g guard admin/admin-guard --skip-tests --flat 
+    --Choose the canactivate option from the list of choices
+
+
+
+

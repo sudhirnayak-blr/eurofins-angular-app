@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoginViewModel } from './login-view-model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './authentication.service';
 import { AuthenticationResponseModel } from './authentication-response-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
  });
 
  constructor(
-  public authService: AuthenticationService 
+  public authService: AuthenticationService,
+  public router: Router
  ) { }
  get f() { return this.loginForm.controls;}
  responseObj : AuthenticationResponseModel = <AuthenticationResponseModel>{};
@@ -39,6 +41,11 @@ export class LoginComponent {
       this.notFoundError=false;
       this.authService.isAuthenticated=true;
       this.authService.tokenObject=this.responseObj;
+
+      //login.component.ts - login method
+      let returnUrl = this.authService.returnUrl || "/home"; 
+      this.router.navigate([returnUrl]);
+
     }, (error) => {
       if(error.status==404) { 
         this.notFoundError = true;

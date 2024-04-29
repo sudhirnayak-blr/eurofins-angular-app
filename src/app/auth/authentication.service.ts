@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { AuthenticationResponseModel } from './authentication-response-model';
 
 
-const loginUrl = "http://localhost:5141/api/accounts/authenticate";
+//const loginUrl = "http://localhost:5046/api/accounts/authenticate";
+const loginUrl = "http://localhost:5046/api/Accounts"
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class AuthenticationService {
 
   isAuthenticated : boolean = false; 
   tokenObject : AuthenticationResponseModel = <AuthenticationResponseModel>{};
+  returnUrl : string = "";
   
   logout() { 
     this.isAuthenticated=false; 

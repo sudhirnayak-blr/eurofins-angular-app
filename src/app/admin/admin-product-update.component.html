@@ -1,0 +1,68 @@
+
+<div class="card shadow m-auto m-2">
+
+    <div class="card-header bg-danger bg-opacity-50 text-center">
+        <div class="fs-3 text-uppercase text-dark">Admin Product Details</div>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="productForm" (ngSubmit)="submit($event)">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control"
+                    name="productName"
+                    id="productName"
+                    formControlName="productName"
+                    />
+                <div *ngIf="f.productName.invalid && (f.productName.dirty || f.productName.touched)"
+                     class="alert alert-danger">
+                    <div *ngIf="f.productName.errors?.['required']">
+                        Name is required.
+                    </div>
+                    <div *ngIf="f.productName.errors?.['minlength']">
+                        Product Name should be at least 4 chars.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unitPrice">Price per unit</label>
+                <input type="number" class="form-control"
+                    name="unitPrice"
+                    formControlName="unitPrice"/>
+                <div *ngIf="f.unitPrice.invalid && (f.unitPrice.dirty || f.unitPrice.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="f.unitPrice.errors?.['required']">
+                       Price is required.
+                    </div>
+                    <div *ngIf="f.unitPrice.errors?.['min']">
+                       Price should be greater than 1.
+                    </div>
+                    <div *ngIf="f.unitPrice.errors?.['max']">
+                        Price should be less than 1000.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unitsInStock">Stock Level</label>
+                <input type="text" class="form-control"
+                    name="unitsInStock"
+                    formControlName="unitsInStock"/>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="discontinued"
+                    formControlName="discontinued"
+                    class="form-check-inline"/>
+                <label for="discontinued">Discontinued</label>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" 
+                        class="btn btn-sm btn-outline-success mx-1">
+                    Save Changes
+                </button>
+                <a routerLink="/admin/products" 
+                    class="btn btn-sm btn-outline-secondary">
+                    Back to List
+                </a>
+            </div>
+        </form>
+    </div>    
+</div>

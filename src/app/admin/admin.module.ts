@@ -10,6 +10,7 @@ import { AdminProductUpdateComponent } from './admin-product-update.component';
 import { AdminProductRemoveComponent } from './admin-product-remove.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MyFilterPipe } from './my-filter.pipe';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminProductDetailsComponent,
     AdminProductCreateComponent,
     AdminProductUpdateComponent,
-    AdminProductRemoveComponent
+    AdminProductRemoveComponent,
+    MyFilterPipe
   ],
   imports: [
     CommonModule,

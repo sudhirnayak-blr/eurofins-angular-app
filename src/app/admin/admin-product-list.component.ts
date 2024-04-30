@@ -10,7 +10,7 @@ import { Product } from '../models/product';
 export class AdminProductListComponent implements OnInit {
 
   productList: Product[] = <Product[]>{}; 
-
+  search: string="";
   constructor(
     private service: AdminProductService
   ) { 
